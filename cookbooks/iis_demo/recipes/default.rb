@@ -28,4 +28,5 @@ end
 
 node["iis_demo"]["sites"].each do |sitename, site_data|
 	site_dir = File.join(ENV['SYSTEMDRIVE'],'inetpub','wwwroot',sitename)
+	directory site_dir
 end
