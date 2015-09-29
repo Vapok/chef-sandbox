@@ -25,3 +25,7 @@ end
 powershell_script "disable deafult site" do |sitedisable|
 	code 'get-website "Default Web Site*" | where {$_.state -ne "Stopped"} | Stop-Website'
 end
+
+node["iis_demo"]["sites"].each do |sitename, site_data|
+	site_dir = File.join(ENV['SYSTEMDRIVE'],'inetpub','wwwroot',sitename)
+end
