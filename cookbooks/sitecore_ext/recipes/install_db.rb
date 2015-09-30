@@ -11,14 +11,14 @@
 include_recipe 'sitecore'
 include_recipe 'windows'
 
-windows_zipfile 'c:/dbs' do
-  source 'https://www.dropbox.com/s/cmhicesz49m2c5z/Sitecore8.zip?dl=1'
+windows_zipfile node['sqlserver']['dbs_path'] do
+  source node['sqlserver']['db_download_url']
   action :unzip
 end
 
-sitecore_db 'CHEF-SXP-SQL' do
+sitecore_db node['sqlserver']['server'] do
   action [:install, :create_login, :assign_roles]
-  site 'CHEFPOC'
+  site node['iis']['sitename']
   databases [
     { 'name' => 'Sitecore.Core', 'type' => 'core' },
     { 'name' => 'Sitecore.Master', 'type' => 'master' },
@@ -26,10 +26,8 @@ sitecore_db 'CHEF-SXP-SQL' do
     { 'name' => 'Sitecore.Sessions', 'type' => 'session' },
     { 'name' => 'Sitecore.Analytics', 'type' => 'analytics' }
   ]
-  source_directory 'c:/dbs/Databases'
+  source_directory "#{node['sqlserver']['dbs_path']}\\Databases"
   
-  #TODO: Add this to a databag
-
-  username 'sitecore_user'
-  password 'foobar123'
+  username node['sqlserver']['username']
+  password node['sqlserver']['password']
 end

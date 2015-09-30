@@ -9,60 +9,81 @@
 # This is used to isntall sitecore on a node.
 
 include_recipe 'sitecore::iis'
+
+if node['mongodb']['install_mongo']
+  include_recipe 'mongodb3::install_mongo'
+end
+
 include_recipe 'sitecore'
 
-remote_file 'c:\inetpub\wwwroot\sitecore8.zip' do
-  source 'https://www.dropbox.com/s/cmhicesz49m2c5z/Sitecore8.zip?dl=1'
+#Download Sitecore Bits Zip
+remote_file node['sitecore']['zip-binary']['toPath'] do
+  source node['sitecore']['zip-binary']['fromUrl']
 end
 
-remote_file 'c:\inetpub\wwwroot\license.xml' do
-  source 'https://www.dropbox.com/s/tlo5run6t3q2pah/license.xml?dl=1'
+#Download license file
+remote_file node['sitecore']['license-file']['toPath'] do
+  source node['sitecore']['license-file']['fromUrl']
 end
 
-sitecore_cms 'CHEFPOC' do
-  source 'c:\inetpub\wwwroot\sitecore8.zip'
-  license 'c:\inetpub\wwwroot\license.xml'
+sitecore_cms node['sitecore']['sitename'] do
+  source node['sitecore']['zip-binary']['toPath']
+  license node['sitecore']['license-file']['toPath']
   bindings [
-    { 'host' => 'chef-sxp-web.cloudapp.net', 'proto' => 'http', 'port' => 80 }
+    { 'host' => node['iis']['binding']['hostname'], 'proto' => 'http', 'port' => node['iis']['binding']['port'] }
   ]
   # TODO: Pull Username/Passwords from Databag
   connection_strings [
     {
       'name' => 'core',
       'database' => 'Sitecore.Core',
-      'user_id' => 'sitecore_user',
-      'password' => 'foobar123',
-      'data_source' => 'chef-sxp-sql'
+      'user_id' => node['sqlserver']['username'],
+      'password' => node['sqlserver']['password'],
+      'data_source' => node['sqlserver']['server']
     },
     {
       'name' => 'master',
       'database' => 'Sitecore.Master',
-      'user_id' => 'sitecore_user',
-      'password' => 'foobar123',
-      'data_source' => 'chef-sxp-sql'
+      'user_id' => node['sqlserver']['username'],
+      'password' => node['sqlserver']['password'],
+      'data_source' => node['sqlserver']['server']
     },
     {
       'name' => 'web',
       'database' => 'Sitecore.Web',
-      'user_id' => 'sitecore_user',
-      'password' => 'foobar123',
-      'data_source' => 'chef-sxp-sql'
+      'user_id' => node['sqlserver']['username'],
+      'password' => node['sqlserver']['password'],
+      'data_source' => node['sqlserver']['server']
     },
     {
       'name' => 'session',
       'database' => 'Sitecore.Session',
-      'user_id' => 'sitecore_user',
-      'password' => 'foobar123',
-      'data_source' => 'chef-sxp-sql'
+      'user_id' => node['sqlserver']['username'],
+      'password' => node['sqlserver']['password'],
+      'data_source' => node['sqlserver']['server']
     },
     {
       'name' => 'analytics',
-      #'connection_string' => 'mongodb://mongodb/analytics'
-      'name' => 'analytics',
+      'connection_string' => "mongodb://#{node['mongodb']['hostname']}/analytics"
+    },
+    {
+      'name' => 'tracking.live',
+      'connection_string' => "mongodb://#{node['mongodb']['hostname']}/tracking_live"
+    },
+    {
+      'name' => 'tracking.history',
+      'connection_string' => "mongodb://#{node['mongodb']['hostname']}/tracking_history"
+    },
+    {
+      'name' => 'tracking.contact',
+      'connection_string' => "mongodb://#{node['mongodb']['hostname']}/tracking_contact"
+    },
+      {
+      'name' => 'reporting',
       'database' => 'Sitecore.Analytics',
-      'user_id' => 'sitecore_user',
-      'password' => 'foobar123',
-      'data_source' => 'chef-sxp-sql'
+      'user_id' => node['sqlserver']['username'],
+      'password' => node['sqlserver']['password'],
+      'data_source' => node['sqlserver']['server']
     }
   ]
 end

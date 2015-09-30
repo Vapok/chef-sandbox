@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: sitecore_ext
+# Cookbook Name:: mongodb3
 # Recipe:: default
 #
 # Copyright 2015, YOUR_COMPANY_NAME
