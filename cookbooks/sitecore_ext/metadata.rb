@@ -1,4 +1,4 @@
-name             'sitecore-ext'
+name             'sitecore_ext'
 maintainer       'YOUR_COMPANY_NAME'
 maintainer_email 'YOUR_EMAIL'
 license          'All rights reserved'

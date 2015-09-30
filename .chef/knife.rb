@@ -8,7 +8,7 @@ client_key               "#{current_dir}/vapok.pem"
 validation_client_name   "vapok-validator"
 validation_key           "#{current_dir}/vapok-validator.pem"
 chef_server_url          "https://api.opscode.com/organizations/vapok"
-cookbook_path            ["#{current_dir}/../cookbooks"]
+cookbook_path            ["#{current_dir}/../cookbooks","#{current_dir}/../vendor/cookbooks"]
 
 if ENV['USERDOMAIN'] != 'VAPOK'
 	http_proxy 'pnavarra:Dragon111@proxy1.russell.com:8080'
