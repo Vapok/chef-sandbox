@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: sitecore-ext
+# Cookbook Name:: sitecore_ext
 # Recipe:: default
 #
 # Copyright 2015, YOUR_COMPANY_NAME
@@ -15,7 +15,6 @@ end
 remote_file 'c:/path/to/license.xml' do
   source 'http://www.example.com/remote_file'
 end
-
 
 sitecore_cms 'MySite' do
   source 'c:/path/to/sitecore7.zip'
