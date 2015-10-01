@@ -21,6 +21,23 @@
 	end
 end
 
+
+powershell_script "set_mixed_mode_sql_server" do
+	code <<-EOH
+		$s = new-object ('Microsoft.SqlServer.Management.Smo.Server') #{instance}
+		[string]$nm = $s.Name
+		[string]$mode = $s.Settings.LoginMode
+		write-output "Instance Name: $nm"
+		write-output "Login Mode: $mode"
+		
+		#Change to Mixed Mode
+		$s.Settings.LoginMode = [Microsoft.SqlServer.Management.SMO.ServerLoginMode]::Mixed
+
+		# Make the changes
+		$srv.Alter()
+	EOH
+end
+
 service "w3svc" do 
 	action [ :enable, :start ]
 end

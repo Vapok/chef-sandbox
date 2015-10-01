@@ -10,7 +10,7 @@ default['iis']['sitename'] = 'CHEFPOC'
 default['iis']['binding'] = {'hostname' => 'chef-sxp-web.cloudapp.net','port' => '80'}
 
 #SQL Settings
-default['sqlserver']['server'] = 'chef-sxp-sql2'
+default['sqlserver']['server_instance'] = 'chef-sxp-sql2'
 default['sqlserver']['username'] = 'sitecore_user'
 default['sqlserver']['password'] = 'foobar123'
 default['sqlserver']['db_download_url'] = 'https://www.dropbox.com/s/cmhicesz49m2c5z/Sitecore8.zip?dl=1'

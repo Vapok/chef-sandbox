@@ -39,28 +39,28 @@ sitecore_cms node['sitecore']['sitename'] do
       'database' => 'Sitecore.Core',
       'user_id' => node['sqlserver']['username'],
       'password' => node['sqlserver']['password'],
-      'data_source' => node['sqlserver']['server']
+      'data_source' => node['sqlserver']['server_instance']
     },
     {
       'name' => 'master',
       'database' => 'Sitecore.Master',
       'user_id' => node['sqlserver']['username'],
       'password' => node['sqlserver']['password'],
-      'data_source' => node['sqlserver']['server']
+      'data_source' => node['sqlserver']['server_instance']
     },
     {
       'name' => 'web',
       'database' => 'Sitecore.Web',
       'user_id' => node['sqlserver']['username'],
       'password' => node['sqlserver']['password'],
-      'data_source' => node['sqlserver']['server']
+      'data_source' => node['sqlserver']['server_instance']
     },
     {
       'name' => 'session',
       'database' => 'Sitecore.Session',
       'user_id' => node['sqlserver']['username'],
       'password' => node['sqlserver']['password'],
-      'data_source' => node['sqlserver']['server']
+      'data_source' => node['sqlserver']['server_instance']
     },
     {
       'name' => 'analytics',
@@ -83,7 +83,7 @@ sitecore_cms node['sitecore']['sitename'] do
       'database' => 'Sitecore.Analytics',
       'user_id' => node['sqlserver']['username'],
       'password' => node['sqlserver']['password'],
-      'data_source' => node['sqlserver']['server']
+      'data_source' => node['sqlserver']['server_instance']
     }
   ]
 end

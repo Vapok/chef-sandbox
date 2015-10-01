@@ -10,13 +10,16 @@
 
 include_recipe 'sitecore'
 include_recipe 'windows'
+include_recipe 'sitecore_ext::set_db_security_to_mixed_mode'
 
 windows_zipfile node['sqlserver']['dbs_path'] do
   source node['sqlserver']['db_download_url']
+  overwrite true
   action :unzip
+  not_if {::File.directory?("#{node['sqlserver']['dbs_path']}\\Databases")}
 end
 
-sitecore_db node['sqlserver']['server'] do
+sitecore_db node['sqlserver']['server_instance'] do
   action [:install, :create_login, :assign_roles]
   site node['iis']['sitename']
   databases [
