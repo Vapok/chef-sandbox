@@ -17,16 +17,16 @@ end
 include_recipe 'sitecore'
 
 #Download Sitecore Bits Zip
-remote_file node['sitecore']['zip-binary']['toPath'] do
-  source node['sitecore']['zip-binary']['fromUrl']
+remote_file "#{node['sitecore']['zip-binary']['toPath']}" do
+  source "#{node['sitecore']['zip-binary']['fromUrl']}"
 end
 
 #Download license file
-remote_file node['sitecore']['license-file']['toPath'] do
-  source node['sitecore']['license-file']['fromUrl']
+remote_file "#{node['sitecore']['license-file']['toPath']}" do
+  source "#{node['sitecore']['license-file']['fromUrl']}"
 end
 
-sitecore_cms node['sitecore']['sitename'] do
+sitecore_cms "#{node['sitecore']['sitename']}" do
   source node['sitecore']['zip-binary']['toPath']
   license node['sitecore']['license-file']['toPath']
   bindings [
