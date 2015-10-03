@@ -15,7 +15,7 @@
       }
     },
     "sqlserver":{
-      "server-name": "poc-sxp-sql1",
+      "server_name": "poc-sxp-sql1",
       "sql_instance": "poc-sxp-sql1",
       "server_ip": "172.16.10.12",
       "port": "1433"
