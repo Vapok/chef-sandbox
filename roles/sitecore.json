@@ -1,0 +1,29 @@
+{
+  "name": "sitecore",
+  "description": "",
+  "json_class": "Chef::Role",
+  "default_attributes": {
+    "sqlserver":{
+      "username":"sitecore_user",
+      "password":"foobar123",
+      "db_download_url":"https://www.dropbox.com/s/cmhicesz49m2c5z/Sitecore8.zip?dl=1",
+      "dbs_path":"c:\\dbs"
+    },
+    "mongodb":{
+      "install_mongo": true
+    },
+    "sitecore":{
+      "sitename": "CHEFPOC"
+    }
+  },
+  "override_attributes": {
+
+  },
+  "chef_type": "role",
+  "run_list": [
+
+  ],
+  "env_run_lists": {
+
+  }
+}

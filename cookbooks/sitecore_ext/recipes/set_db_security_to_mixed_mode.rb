@@ -15,7 +15,7 @@ powershell_script 'Change Authentication Mode' do
 	code <<-EOH
 		Add-Type -Assembly 'Microsoft.SqlServer.Smo, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91'
 		# Connect to the instance using SMO
-		$server = new-object ('Microsoft.SqlServer.Management.Smo.Server') '#{node['sqlserver']['server_instance']}'
+		$server = new-object ('Microsoft.SqlServer.Management.Smo.Server') '#{node['sqlserver']['sql_instance']}'
 		$server.Settings.LoginMode = [Microsoft.SqlServer.Management.Smo.ServerLoginMode]::Mixed
 		$server.Alter()
 		Stop-Service -Name 'SQLSERVERAGENT'
@@ -27,7 +27,7 @@ powershell_script 'Change Authentication Mode' do
 	not_if <<-ENDNOTIF
 		Add-Type -Assembly 'Microsoft.SqlServer.Smo, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91'
 		# Connect to the instance using SMO
-		$sql=new-object ('Microsoft.SqlServer.Management.Smo.Server') '#{node['sqlserver']['server_instance']}'
+		$sql=new-object ('Microsoft.SqlServer.Management.Smo.Server') '#{node['sqlserver']['sql_instance']}'
 		$sqlmode=$sql.Settings.LoginMode
 		$sqlmode -eq "Mixed"
 	ENDNOTIF

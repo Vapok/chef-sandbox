@@ -1,0 +1,42 @@
+{
+  "name": "pete-sql",
+  "description": "",
+  "json_class": "Chef::Role",
+  "default_attributes": {
+    "iis":{
+      "sitename":"CHEFPOC",
+      "binding": {
+        "hostname": "chef-sxp-web3.cloudapp.net",
+        "port": "80"
+      }
+    },
+    "sqlserver":{
+      "server-name": "chef-sxp-sql3",
+      "sql_instance": "chef-sxp-sql3",
+      "server_ip": "172.16.10.5",
+      "port": "1433",
+      "username":"sitecore_user",
+      "password":"foobar123",
+      "db_download_url":"https://www.dropbox.com/s/cmhicesz49m2c5z/Sitecore8.zip?dl=1",
+      "dbs_path":"c:\\dbs"
+    },
+    "mongodb":{
+      "install_mongo": true,
+      "hostname": "localhost"
+    },
+    "sitecore":{
+      "sitename": "CHEFPOC"
+    }
+  },
+  "override_attributes": {
+
+  },
+  "chef_type": "role",
+  "run_list": [
+
+  ],
+  "env_run_lists": {
+
+  }
+}
+

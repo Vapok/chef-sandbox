@@ -1,9 +1,6 @@
-sitecore-ext Cookbook
+sitecore_ext Cookbook
 =====================
-TODO: Enter the cookbook description here.
-
-e.g.
-This cookbook makes your favorite breakfast sandwich.
+Installs and configures SiteCore CMS system and dependencies.
 
 Requirements
 ------------
@@ -11,14 +8,14 @@ TODO: List your cookbook requirements. Be sure to include any requirements this 
 
 e.g.
 #### packages
-- `toaster` - sitecore-ext needs toaster to brown your bagel.
+- `toaster` - sitecore_ext needs toaster to brown your bagel.
 
 Attributes
 ----------
 TODO: List your cookbook attributes here.
 
 e.g.
-#### sitecore-ext::default
+#### sitecore_ext::default
 <table>
   <tr>
     <th>Key</th>
@@ -65,4 +62,6 @@ e.g.
 
 License and Authors
 -------------------
-Authors: TODO: List authors
+Authors: 
+* pnavarra - pnavarra@russell.com - Pete Navara (XCentium)
+* lmclaugh - lmclaughlin@russell.com - Lane McLaughlin

@@ -1,0 +1,30 @@
+{
+  "name": "pete",
+  "description": "Pete's Playground",
+  "cookbook_versions": {
+
+  },
+  "json_class": "Chef::Environment",
+  "chef_type": "environment",
+  "default_attributes": {
+    "iis":{
+      "sitename":"CHEFPOC",
+      "binding": {
+        "hostname": "chef-sxp-web3.cloudapp.net",
+        "port": "80"
+      }
+    },
+    "sqlserver":{
+      "server-name": "chef-sxp-sql3",
+      "sql_instance": "chef-sxp-sql3",
+      "server_ip": "172.16.10.5",
+      "port": "1433"
+    },
+    "mongodb":{
+      "hostname": "localhost"
+    }
+  },
+  "override_attributes": {
+
+  }
+}

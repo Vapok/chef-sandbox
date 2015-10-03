@@ -1,0 +1,30 @@
+{
+  "name": "proof-of-concept",
+  "description": "",
+  "cookbook_versions": {
+
+  },
+  "json_class": "Chef::Environment",
+  "chef_type": "environment",
+  "default_attributes": {
+    "iis":{
+      "sitename":"CHEFPOC",
+      "binding": {
+        "hostname": "poc-sxp-web1.cloudapp.net",
+        "port": "80"
+      }
+    },
+    "sqlserver":{
+      "server-name": "poc-sxp-sql1",
+      "sql_instance": "poc-sxp-sql1",
+      "server_ip": "172.16.10.12",
+      "port": "1433"
+    },
+    "mongodb":{
+      "hostname": "localhost"
+    }
+  },
+  "override_attributes": {
+
+  }
+}
