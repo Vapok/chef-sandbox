@@ -17,7 +17,7 @@
     "sqlserver":{
       "server_name": "poc-sxp-sql1",
       "sql_instance": "poc-sxp-sql1",
-      "server_ip": "172.16.10.12",
+      "server_ip": "172.16.10.13",
       "port": "1433"
     },
     "mongodb":{
