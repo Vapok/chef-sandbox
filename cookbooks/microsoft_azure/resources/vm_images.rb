@@ -20,9 +20,5 @@ attribute :management_certificate, :kind_of => String, :required => true
 attribute :subscription_id, :kind_of => String, :required => true
 attribute :management_endpoint, :kind_of => String, :default => 'https://management.core.windows.net/'
 
-attribute :image_list, :kind_of => Array
+attr_accessor :list_of_images
 
-def initialize(*args)
-  super
-  @action = :list
-end
