@@ -1,61 +1,23 @@
-microsoft_azure_expanded Cookbook
+msazure_expanded Cookbook
 =================================
-TODO: Enter the cookbook description here.
-
-e.g.
-This cookbook makes your favorite breakfast sandwich.
+This cookbook is a direct expansion of the microsoft_azure cookbook created by Jeff Mendoza (jemendoz@microsoft.com).
+The microsoft_azure cookbook only provides for a couple Azure API services. The msazure_expanded cookbook adds additional services not accounted for in the original cookbook.
 
 Requirements
 ------------
-TODO: List your cookbook requirements. Be sure to include any requirements this cookbook has on platforms, libraries, other cookbooks, packages, operating systems, etc.
+#### Cookbooks
+- "microsoft_azure" cookbook ~>0.2.0
 
-e.g.
-#### packages
-- `toaster` - microsoft_azure_expanded needs toaster to brown your bagel.
 
 Attributes
 ----------
-TODO: List your cookbook attributes here.
-
-e.g.
-#### microsoft_azure_expanded::default
-<table>
-  <tr>
-    <th>Key</th>
-    <th>Type</th>
-    <th>Description</th>
-    <th>Default</th>
-  </tr>
-  <tr>
-    <td><tt>['microsoft_azure_expanded']['bacon']</tt></td>
-    <td>Boolean</td>
-    <td>whether to include bacon</td>
-    <td><tt>true</tt></td>
-  </tr>
-</table>
 
 Usage
 -----
-#### microsoft_azure_expanded::default
-TODO: Write usage instructions for each cookbook.
-
-e.g.
-Just include `microsoft_azure_expanded` in your node's `run_list`:
-
-```json
-{
-  "name":"my_node",
-  "run_list": [
-    "recipe[microsoft_azure_expanded]"
-  ]
-}
-```
+Please refer to the "microsoft_azure" README file to understand how to use the resources provided in it, and the msazure_expanded
 
 Contributing
 ------------
-TODO: (optional) If this is a public cookbook, detail the process for contributing. If this is a private cookbook, remove this section.
-
-e.g.
 1. Fork the repository on Github
 2. Create a named feature branch (like `add_component_x`)
 3. Write your change
@@ -65,4 +27,70 @@ e.g.
 
 License and Authors
 -------------------
-Authors: TODO: List authors
+Authors: Pete Navarra (@Vapok)
+
+
+Recipes
+=======
+
+default.rb
+----------
+
+The default recipe installs the `azure` RubyGem, which this cookbook
+requires in order to work with the Azure API. Make sure that the
+microsoft_azure recipe is in the node or role `run_list` before any
+resources from this cookbook are used.
+
+    "run_list": [
+      "recipe[msazure_expanded]"
+    ]
+
+The `gem_package` is created as a Ruby Object and thus installed
+during the Compile Phase of the Chef run.
+
+Resources and Providers
+=======================
+
+msazure_expanded_vm_images
+--------------------------
+
+## vm_images.rb
+
+
+Loads available Azure VM Images with this resource into a resource attribute.
+
+Actions:
+
+* `init` - Initializes the Resource.
+
+Attribute Parameters:
+
+* `management_certificate` - PEM file contents of Azure management
+  certificate, required.
+* `subscription_id` - ID of Azure subscription, required.
+* `management_endpoint` - Endpoint for Azure API, defaults to `management.core.windows.net`.
+* `list_of_images` - List of available images loaded during Action Init
+
+### Recipe Example
+
+msazure_expanded_vm_images 'images_listing' do
+  management_certificate microsoft_azure['management_certificate'].join("\n")
+  subscription_id microsoft_azure['subscription_id']
+  action :init
+end
+
+### Retrieving Output of Resource
+ruby_block 'show_images' do
+  block do
+      r = resources("msazure_expanded_vm_images[images_listing]")
+      images = r.list_of_images
+      if images.kind_of?(Array) && images.count > 0
+        images.take(10).each do |image|
+          puts "From Recipe: Image: #{image}"
+        end
+      else
+        puts "Images not loaded?"
+      end
+  end
+  action :run
+end
