@@ -20,5 +20,10 @@ attribute :management_certificate, :kind_of => String, :required => true
 attribute :subscription_id, :kind_of => String, :required => true
 attribute :management_endpoint, :kind_of => String, :default => 'https://management.core.windows.net/'
 
-attr_accessor :list_of_images
+attr_reader :list_of_images
 
+def initialize(*args)
+  super
+  @resource_name = :microsoft_azure_vm_images
+  @action = :list
+end
