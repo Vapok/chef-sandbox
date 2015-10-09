@@ -17,10 +17,10 @@
 # FIXME must force macaddr version to workaround systemu conflict
 chef_gem 'macaddr' do
   action :remove
-  not_if '/opt/chef/embedded/bin/gem list macaddr | grep "(1.7.1)"'
+  not_if '/opt/chef/embedded/bin/gem list macaddr | grep "(1.6.1)"'
 end
 chef_gem 'macaddr' do
-  version '1.7.1'
+  version '1.6.1'
   action :install
 end
  

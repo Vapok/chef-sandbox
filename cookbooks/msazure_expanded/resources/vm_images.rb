@@ -1,6 +1,6 @@
-# Author Jeff Mendoza (jemendoz@microsoft.com)
+# Author : Pete Navarra (vapokrocks@gmail.com)
 #-------------------------------------------------------------------------
-# Copyright (c) Microsoft Open Technologies, Inc.
+# Copyright (c) Vapok, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,4 +14,18 @@
 # limitations under the License.
 #--------------------------------------------------------------------------
 
-default['microsoft_azure']['azure_gem_version'] = "0.6.0"
+actions :init
+
+attribute :management_certificate, :kind_of => String, :required => true
+attribute :subscription_id, :kind_of => String, :required => true
+attribute :management_endpoint, :kind_of => String, :default => 'https://management.core.windows.net/'
+attribute :list_of_images, :kind_of => Array
+
+attr_accessor :loaded
+attr_accessor :images
+
+def initialize(*args)
+  super
+  @resource_name = :msazure_expanded_vm_images
+  @action = :init
+end
